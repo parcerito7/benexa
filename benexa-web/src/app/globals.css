@@ -2,27 +2,130 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base tema claro */
+/* Base tema claro + tipografía sistema */
 html, body {
   height: 100%;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   background-color: #ffffff;
-  color: #0B0F10; /* benexa-dark */
+  color: #0B0F10;
 }
 
-/* Utilidades */
 @layer components {
+  /* Layout */
   .container { @apply mx-auto max-w-7xl px-4; }
-  .section { @apply py-20 md:py-28; }
+  .section { @apply py-24 md:py-32; }
 
+  /* Tipografía */
+  h1 { @apply text-5xl md:text-7xl font-semibold leading-[1.15] tracking-tight text-benexa-dark; }
+  h2 { @apply text-3xl md:text-4xl font-semibold tracking-tight text-benexa-dark; }
+  p.lead { @apply text-lg md:text-xl text-benexa-dark/70; }
+
+  /* Botones */
   .btn { @apply inline-flex items-center gap-2 rounded-full px-6 py-3 text-base font-medium transition; }
   .btn-primary { @apply bg-benexa-teal text-white hover:opacity-90; }
-  .btn-ghost { @apply border border-benexa-dark/20 text-benexa-dark hover:bg-benexa-light/10; }
+  .btn-ghost { @apply border border-benexa-dark/15 text-benexa-dark hover:bg-benexa-teal/10; }
 
-  h1 { @apply text-4xl md:text-6xl font-semibold leading-tight text-benexa-dark; }
-  h2 { @apply text-3xl md:text-4xl font-semibold text-benexa-dark; }
-  p.lead { @apply text-lg md:text-xl text-benexa-dark/80; }
+  /* Cards y hero suave */
+  .card { @apply rounded-3xl border border-benexa-dark/10 bg-white p-8 shadow; }
+  .bg-hero-pastel {
+    background:
+      radial-gradient(900px 500px at 20% -10%, rgba(38,215,174,0.18) 0%, transparent 60%),
+      radial-gradient(700px 400px at 80% 0%, rgba(38,215,174,0.10) 0%, transparent 60%);
+  }
 
-  /* Tarjeta de cristal */
-  .glass { @apply rounded-3xl border border-benexa-dark/10 bg-white/60 shadow-glass backdrop-blur; }
+  /* Vista previa Siri (clara) */
+  .card-preview { @apply rounded-[28px] border border-benexa-dark/15 bg-white p-6 md:p-10 shadow; }
+  .preview-box { @apply rounded-2xl border border-benexa-dark/10 bg-white p-5 shadow-sm; }
+  .list-soft li { @apply rounded-xl border border-benexa-dark/10 px-3 py-2; }
+
+  /* ===== Acentos animados verde (como “sin complicarse”) ===== */
+  .text-animated-green {
+    background-image: linear-gradient(90deg,#00b894 0%,#26d7ae 25%,#6ee7c2 50%,#26d7ae 75%,#00b894 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: benexaGradientShift 6s linear infinite;
+  }
+  .badge-animated-green {
+    background-image: linear-gradient(90deg,#00b894,#26d7ae,#6ee7c2,#26d7ae,#00b894);
+    background-size: 200% 100%;
+    color: white;
+    animation: benexaGradientShift 6s linear infinite;
+  }
+  .btn-animated-green {
+    background-image: linear-gradient(90deg,#00b894,#26d7ae,#6ee7c2);
+    background-size: 200% 100%;
+    color: white;
+    transition: filter .2s ease;
+    animation: benexaGradientShift 6s linear infinite;
+  }
+  .btn-animated-green:hover { filter: brightness(0.95); }
+
+  @keyframes benexaGradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+  @media (prefers-reduced-motion: reduce){
+    .text-animated-green,.badge-animated-green,.btn-animated-green{ animation: none; background-position: 50% 50%; }
+  }
+
+  /* Chips */
+  .chip { @apply inline-flex items-center gap-2 rounded-full bg-benexa-teal/10 px-3 py-1 text-sm text-benexa-dark; }
+  .chip-accent { @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm; }
+  .chip-accent { color: white; background-image: linear-gradient(90deg,#00b894,#26d7ae,#6ee7c2); background-size: 200% 100%; animation: benexaGradientShift 6s linear infinite; }
+
+  /* Banda clara tipo Siri */
+  .band-green { background: linear-gradient(180deg,#e6fff7 0%,#f4fffb 30%,#ffffff 100%); }
+
+  /* ===== Carrusel continuo full-bleed ===== */
+  .marquee-viewport { overflow: hidden; }
+  .marquee-track {
+    display: inline-flex;
+    gap: 1.5rem;
+    animation: marqueeScroll 38s linear infinite;
+    will-change: transform;
+  }
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); } /* duplicamos items para loop */
+  }
+  .full-bleed { width: 100vw; margin-left: 50%; transform: translateX(-50%); }
+
+  /* Tarjetas-píldora coloridas (más Apple) */
+  .pill {
+    border-radius: 28px;
+    box-shadow: 0 16px 40px rgba(0,0,0,.08);
+    border: 1px solid rgba(11,15,16,.08);
+    background: #fff;
+  }
+  .pill-inner { @apply p-6 md:p-8; }
+  .eyebrow { @apply text-sm text-benexa-dark/60; }
+  .icon-circle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 9999px; color: #0B0F10; font-weight: 600;
+    background: #fff; border: 1px solid rgba(11,15,16,.08); box-shadow: 0 4px 14px rgba(0,0,0,.06);
+  }
+
+  /* Variantes pastel con toque más vivo */
+  .pill-green  { background: linear-gradient(180deg,#eafff6 0%,#ffffff 70%); }
+  .pill-blue   { background: linear-gradient(180deg,#eaf3ff 0%,#ffffff 70%); }
+  .pill-violet { background: linear-gradient(180deg,#f2eaff 0%,#ffffff 70%); }
+  .pill-rose   { background: linear-gradient(180deg,#ffeaf3 0%,#ffffff 70%); }
+
+  /* Sección verde estilo Apple */
+  .section-green { background-color:#00b894; color:white; }
+  .text-gradient-apple {
+    background-image: linear-gradient(90deg,#00b894,#26d7ae,#6ee7c2,#26d7ae,#00b894);
+    background-size:200% 100%;
+    -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; color:transparent;
+    animation: benexaGradientShift 6s linear infinite;
+  }
+
+  /* CTA banda gradiente */
+  .cta-band {
+    background-image: linear-gradient(90deg,#00b894 0%, #26d7ae 50%, #6ee7c2 100%);
+    background-size: 200% 100%;
+    animation: benexaGradientShift 8s linear infinite;
+    color: white;
+    border-radius: 28px;
+    box-shadow: 0 18px 50px rgba(0,0,0,.12);
+  }
 }

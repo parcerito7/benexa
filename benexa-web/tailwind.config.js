@@ -8,20 +8,25 @@ module.exports = {
     extend: {
       colors: {
         benexa: {
-          teal: "#00B894",   // verde principal
-          dark: "#0B0F10",   // texto
-          light: "#26D7AE",  // acento claro
+          teal: "#00B894",
+          dark: "#0B0F10",
+          light: "#26D7AE",
+          gray: "#69707D"
         },
       },
-      backgroundImage: {
-        "benexa-pastel":
-          "radial-gradient(1000px 600px at 20% -10%, rgba(38,215,174,0.25) 0%, transparent 60%), radial-gradient(800px 500px at 80% 0%, rgba(0,184,148,0.18) 0%, transparent 60%)",
+      letterSpacing: {
+        tight: "-0.01em",   // titulares más compactos (Apple-like)
+        tighter: "-0.02em",
+      },
+      lineHeight: {
+        snug: "1.15",       // titulares más densos
       },
       boxShadow: {
-        glass: "0 10px 40px rgba(0,0,0,.08)",
+        soft: "0 10px 30px rgba(0,0,0,0.06)",
       },
-      backdropBlur: {
-        xs: "2px",
+      borderRadius: {
+        xl2: "1.25rem",     // cards suaves
+        xl3: "1.75rem",
       },
     },
   },
